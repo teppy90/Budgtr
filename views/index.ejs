@@ -1,43 +1,38 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <%- include('../partials/head.ejs') %>
-    </head>
-    <body>
-        <h4>Balance:   <span id="bank-account"><%=total%></span></h4>
-        <h3>Budget List</h3>
-        <div id ="budget-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-    
-                <tbody>
-                    <% budget.forEach((item, index) => { %>
-                    <tr>
-                        <td><%=item.date%></td>
-                        <td><a href="/budget/<%=index%>"><%=item.name%></a></td>
-                        <td class="item-amount"><%=item.amount%></td>
-                        <td>
-                            <form action="/budget/<%=index%>/edit">
-                                <input type="submit" value="Edit" class="edit-button">
-                            </form>
-                            <form action="/budget/<%=index%>?_method=DELETE" method="POST">
-                                <input type="submit" value="Delete" class="delete-button">
-                            </form>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-            <form action="/budget/all?_method=DELETE" method="POST">
-                <button type="submit" class="btn waves-effect waves-light delete-button">Delete All</button>
-            </form>  
-        </div> 
-    </body>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<%- include('./partials/head.ejs') %>
+		<script src="./app.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Budgtr</h1>
+			<a href="/budgets/new"
+				><button type="button" name="button">New Item</button></a
+			>
+			<% if(bankAccount > 1000) { %>
+			<h2 class="wealthy">Bank Account Total: <%= bankAccount %></h2>
+			<% } else if (bankAccount < 0){%>
+			<h2 class="debt">Bank Account Total: <%= bankAccount %></h2>
+			<% } else {%>
+			<h2>Bank Account Total: <%= bankAccount %></h2>
+			<% } %>
+
+			<table>
+				<tbody>
+					<% let counter = 0 %> <% for (ledgerItem of ledger){ %>
+					<tr>
+						<td><%= ledgerItem.date %></td>
+						<td>
+							<a href="/budgets/<%= counter %>"
+								><%= ledgerItem.name %></a
+							>
+						</td>
+						<td><%= ledgerItem.amount %></td>
+					</tr>
+					<% counter++%> <% } %>
+				</tbody>
+			</table>
+		</div>
+	</body>
 </html>

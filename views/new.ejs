@@ -1,19 +1,23 @@
-
-    configured body-parser
-    Add a button in your index.ejs that links to a new route that displays new.ejs
-    The new.ejs should contain
-    html boilerplate
-    links to your css files
-    a div with the class container
-    an h1 with a descriptive title
-    a form, with the appropriate action and method
-    an input field for
-        date
-        name
-        amount
-        from
-        submit
-        tags (bonus)
-    Styling forms are a pain, keep it simple for now
-
-Hint: use the attribute placeholder in the input field to see a placeholder value, rather than putting a label of the input field outside. Here is an example:
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<%- include('./partials/head.ejs') %>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Add a new item</h1>
+			<form action="/budgets" method="POST">
+				<input type="date" name="date" value="" placeholder="date" />
+				<input type="text" name="name" value="" placeholder="name" />
+				<input
+					type="number"
+					name="amount"
+					value=""
+					placeholder="amount"
+				/>
+				<input type="text" name="from" value="" placeholder="from" />
+				<input type="submit" value="Create New Item" />
+			</form>
+		</div>
+	</body>
+</html>
