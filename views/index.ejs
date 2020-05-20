@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body>
+        <h4>Balance:   <span id="bank-account"><%=total%></span></h4>
+        <h3>Budget List</h3>
+        <div id ="budget-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    <% budget.forEach((item, index) => { %>
+                    <tr>
+                        <td><%=item.date%></td>
+                        <td><a href="/budget/<%=index%>"><%=item.name%></a></td>
+                        <td class="item-amount"><%=item.amount%></td>
+                        <td>
+                            <form action="/budget/<%=index%>/edit">
+                                <input type="submit" value="Edit" class="edit-button">
+                            </form>
+                            <form action="/budget/<%=index%>?_method=DELETE" method="POST">
+                                <input type="submit" value="Delete" class="delete-button">
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <form action="/budget/all?_method=DELETE" method="POST">
+                <button type="submit" class="btn waves-effect waves-light delete-button">Delete All</button>
+            </form>  
+        </div> 
+    </body>
+</html>

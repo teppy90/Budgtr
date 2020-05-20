@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body>
+        <h2>Budget Details</h2>
+        <div id="budget-details">
+            <h4>Name : <%=budget.name%></h4>
+            <h4>Date : <%=budget.date%></h4>
+            <h4>From : <%=budget.from%></h4>
+            <h4>Amount : <%=budget.amount%></h4>
+            <h4>Tags : <%=budget.tags%></h4> 
+            <div>
+                <form action="/budget/<%=index%>/edit">
+                    <button type="submit" class="btn waves-effect waves-light edit-button">Edit</button>
+                </form>
+                <br>
+                <form action="/budget/<%=index%>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn waves-effect waves-light delete-button">Delete</button>
+                </form>
+            </div>
+        </div>
+       
+    </body>
+</html>
+
+app.get('/fruits/:indexOfFruitsArray', function(req, res){
+    res.render('show.ejs');
+});        
